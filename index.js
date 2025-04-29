@@ -42,13 +42,13 @@ app.post("/api/shorturl", (req, res) => {
 
   // Validate the URL format first
   if (!isValidUrl(originalUrl)) {
-    return res.json({ error: "Invalid URL format" });
+    return res.json({ error: "invalid url" });
   }
 
   // Check if the URL is valid by doing a DNS lookup
   dns.lookup(new URL(originalUrl).hostname, (err, address, family) => {
     if (err) {
-      return res.json({ error: "Invalid URL" });
+      return res.json({ error: "invalid url" });
     }
 
     // Generate a unique short code for the URL
