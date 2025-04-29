@@ -57,6 +57,19 @@ app.post('/api/shorturl', (req, res) => {
   });
 });
 
+app.get("/api/shorturl/:shortcode", (req, res) => {
+  const shortCode = req.params.shortcode;
+
+  // Look up the original URL from the database
+  const originalUrl = urlDatabase[shortCode];
+
+  if (originalUrl) {
+    res.redirect(originalUrl);
+  } else {
+    res.json({ error: "Short URL not found" });
+  }
+});
+
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
